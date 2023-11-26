@@ -6,12 +6,50 @@ Console.OutputEncoding = System.Text.Encoding.UTF8;
 decimal precoInicial = 0;
 decimal precoPorHora = 0;
 
-Console.WriteLine("Seja bem vindo ao sistema de estacionamento!\n" +
-                  "Digite o preço inicial:");
-precoInicial = Convert.ToDecimal(Console.ReadLine());
+// Exibir uma mensagem estilizada
+Console.ForegroundColor = ConsoleColor.Green;
+Console.WriteLine(@"                                                                                                  ");
+Console.WriteLine(@"  _   ______       _                _                                               _           _ ");
+Console.WriteLine(@" | | |  ____|     | |              (_)                                             | |         | |");
+Console.WriteLine(@" | | | |__    ___ | |_  __ _   ___  _   ___   _ __    __ _  _ __ ___    ___  _ __  | |_  ___   | |");
+Console.WriteLine(@" | | |  __|  / __|| __|/ _` | / __|| | / _ \ | '_ \  / _` || '_ ` _ \  / _ \| '_ \ | __|/ _ \  | |");
+Console.WriteLine(@" |_| | |____ \__ \| |_| (_| || (__ | || (_) || | | || (_| || | | | | ||  __/| | | || |_| (_) | |_|");
+Console.WriteLine(@" (_) |______||___/ \__|\__,_| \___||_| \___/ |_| |_| \__,_||_| |_| |_| \___||_| |_| \__|\___/  (_)");
+Console.WriteLine(@"                                                                                                  ");
+Console.ForegroundColor = ConsoleColor.White;
 
-Console.WriteLine("Agora digite o preço por hora:");
-precoPorHora = Convert.ToDecimal(Console.ReadLine());
+Console.WriteLine("\nBEM VINDX AO SISTEMA DE COBRANÇA DO ESTACIONAMENTO\n");
+Console.WriteLine("No primeiro acesso precisamos definir os valores do estacionamento.");
+
+do
+{
+    Console.WriteLine("Digite o valor do PREÇO INICIAL [R$]: ");
+    if (decimal.TryParse(Console.ReadLine(), out precoInicial))
+    {
+        break;
+    }
+    else
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("Erro, o valor digitado é invalido!\nTente novamente, ex.: 6.50");
+        Console.ForegroundColor = ConsoleColor.White;
+    }
+} while(true);
+
+do
+{
+    Console.WriteLine("Digite o valor do PREÇO DA HORA [R$/h]:");
+    if (decimal.TryParse(Console.ReadLine(), out precoPorHora))
+    {
+        break;
+    }
+    else
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("Erro, o valor digitado é invalido!\nTente novamente, ex.: 2.75");
+        Console.ForegroundColor = ConsoleColor.White;
+    }
+} while(true);
 
 // Instancia a classe Estacionamento, já com os valores obtidos anteriormente
 Estacionamento es = new Estacionamento(precoInicial, precoPorHora);
@@ -23,11 +61,23 @@ bool exibirMenu = true;
 while (exibirMenu)
 {
     Console.Clear();
-    Console.WriteLine("Digite a sua opção:");
-    Console.WriteLine("1 - Cadastrar veículo");
-    Console.WriteLine("2 - Remover veículo");
-    Console.WriteLine("3 - Listar veículos");
-    Console.WriteLine("4 - Encerrar");
+    Console.ForegroundColor = ConsoleColor.Green;
+    Console.WriteLine(@"                                                                                                  ");
+    Console.WriteLine(@"  _   ______       _                _                                               _           _ ");
+    Console.WriteLine(@" | | |  ____|     | |              (_)                                             | |         | |");
+    Console.WriteLine(@" | | | |__    ___ | |_  __ _   ___  _   ___   _ __    __ _  _ __ ___    ___  _ __  | |_  ___   | |");
+    Console.WriteLine(@" | | |  __|  / __|| __|/ _` | / __|| | / _ \ | '_ \  / _` || '_ ` _ \  / _ \| '_ \ | __|/ _ \  | |");
+    Console.WriteLine(@" |_| | |____ \__ \| |_| (_| || (__ | || (_) || | | || (_| || | | | | ||  __/| | | || |_| (_) | |_|");
+    Console.WriteLine(@" (_) |______||___/ \__|\__,_| \___||_| \___/ |_| |_| \__,_||_| |_| |_| \___||_| |_| \__|\___/  (_)");
+    Console.WriteLine(@"                                                                                                  ");
+    Console.ForegroundColor = ConsoleColor.White;
+    Console.WriteLine($"Preço Inicial: R$ {precoInicial:F2}\nPreço por Hora: R$ {precoPorHora:F2}\n");
+    Console.WriteLine("--------- DIGITE A OPÇÃO DESEJADA ---------");
+    Console.WriteLine("1 - Cadastrar Veículo");
+    Console.WriteLine("2 - Remover Veículo (Cálculo da Cobrança)");
+    Console.WriteLine("3 - Listar Veículos");
+    Console.WriteLine("9 - Sair do Programa");
+    Console.WriteLine("-------------------------------------------\n");
 
     switch (Console.ReadLine())
     {
@@ -43,17 +93,20 @@ while (exibirMenu)
             es.ListarVeiculos();
             break;
 
-        case "4":
+        case "9":
             exibirMenu = false;
             break;
 
         default:
-            Console.WriteLine("Opção inválida");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Opção Inválida, tente novamente :(");
+            Console.ForegroundColor = ConsoleColor.White;
+
             break;
     }
 
-    Console.WriteLine("Pressione uma tecla para continuar");
+    Console.WriteLine("Pressione ENTER para continuar!");
     Console.ReadLine();
 }
 
-Console.WriteLine("O programa se encerrou");
+Console.WriteLine("---- PROGRAMA FOI ENCERRADO, ATÉ BREVE ----\n");
